@@ -69,36 +69,42 @@
         if (data.days) {
             columns.push(["days"].concat(data.days));
         }
-        c3.generate({
-            data: {
-                x: "x",
-                columns: columns,
-                names: {
-                    open: "Open Bugs",
-                    closed: "Closed Bugs",
+        document.getElementById('chart').style.opacity = 0;
+        setTimeout(() => {
+            c3.generate({
+                data: {
+                    x: "x",
+                    columns: columns,
+                    names: {
+                        open: "Open Bugs",
+                        closed: "Closed Bugs",
+                    },
+                    types: {
+                        days: "line",
+                        open: "area",
+                        closed: "area",
+                    },
+                    colors: {
+                        days: FIREFOX_BLUE,
+                        open: "#00C",
+                        closed: "#090",
+                    },
+                    groups: [["open", "closed"]],
+                    order: null,
                 },
-                types: {
-                    days: "line",
-                    open: "area",
-                    closed: "area",
-                },
-                colors: {
-                    days: FIREFOX_BLUE,
-                    open: "#00C",
-                    closed: "#090",
-                },
-                groups: [["open", "closed"]],
-                order: null,
-            },
-            axis: {
-                x: {
-                    type: "timeseries",
-                    tick: {
-                        format: "%Y-%m-%d",
+                axis: {
+                    x: {
+                        type: "timeseries",
+                        tick: {
+                            format: "%Y-%m-%d",
+                        }
                     }
-                }
-            },
-        });
+                },
+            });
+            document.getElementById('chart').style.opacity = 1;
+            document.getElementById('bugs').style.opacity = 1;
+        }, 150);
+
     }
 
     function createElement(tag, child) {
@@ -148,6 +154,7 @@
             }
 
             const bugList = document.getElementById("bugs");
+            const bugTable = document.getElementById("bugtable");
             let listURL = `https://bugzilla.mozilla.org/buglist.cgi?bug_id=`;
 
             _.forEach(bugs, bug => {
@@ -155,9 +162,11 @@
                     const bugURL = $bugzilla.makeURL(bug.id);
                     //debug("Bug " + bug.id + " " + bug.summary, bugURL);
 
-                    const bugRow = createElement("div");
-                    bugRow.appendChild(createLink("bug " + bug.id + " - " + bug.summary, bugURL));
-                    bugList.appendChild(bugRow);
+                    const bugRow = createElement("tr");
+                    const bugCol = createElement("td");
+                    bugCol.appendChild(createLink("bug " + bug.id + " - " + bug.summary, bugURL));
+                    bugRow.appendChild(bugCol);
+                    bugTable.appendChild(bugRow);
                     listURL += `${bug.id},`;
                 }
 
@@ -172,7 +181,7 @@
 
             const openLink = createLink("Open bug list in Bugzilla", listURL);
             openLink.classList.add('open-bugzilla');
-            bugList.appendChild(openLink);
+            bugList.insertBefore(openLink, bugList.firstChild);
 
             const bugDates = [];
             const openBugCounts = [];

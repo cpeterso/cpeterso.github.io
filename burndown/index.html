@@ -20,10 +20,13 @@
                 font-size: 72px;
                 font-weight: bolder;
                 margin: 1em auto;
-                width: 90%
+                width: 90%;
+                transition: opacity 150ms ease-in-out;
             }
             #bugs {
                 margin-bottom: 2em;
+                opacity: 0;
+                transition: opacity 150ms ease-in-out;
             }
             .open-bugzilla {
                 line-height: 5em;
@@ -32,7 +35,11 @@
     </head>
     <body>
         <div id="chart" class="container">Loading…</div>
-        <div id="bugs" class="container"></div>
+        <div id="bugs" class="container">
+            <table class="table table-striped table-condensed">
+                <tbody id="bugtable"></tbody>
+            </table>
+        </div>
 
         <!-- Bootstrap -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" defer></script>
