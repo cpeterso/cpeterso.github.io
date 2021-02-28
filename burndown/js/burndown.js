@@ -68,7 +68,7 @@
     }
 
     function drawChart(bugDates, openBugCounts, closedBugCounts) {
-        c3.generate({
+        bb.generate({
             data: {
                 xs: {
                     "openBugCounts": "bugDates",
