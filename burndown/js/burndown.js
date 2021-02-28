@@ -1,16 +1,12 @@
 ;((exports) => {
     "use strict";
 
-    // https://www.mozilla.org/en-US/styleguide/identity/firefox/color/
-    const FIREFOX_ORANGE = "#E66000";
-    const FIREFOX_LIGHT_ORANGE = "#FF9500";
-    const FIREFOX_YELLOW = "#FFCB00";
-    const FIREFOX_BLUE = "#00539F";
-    const FIREFOX_LIGHT_BLUE = "#0095DD";
-    const FIREFOX_LIGHT_BLUE_GREY1 = "#EAEFF2";
-    const FIREFOX_LIGHT_BLUE_GREY2 = "#D4DDE4";
-    const FIREFOX_DARK_BLUE_GREY1 = "#424F5A";
-    const FIREFOX_DARK_BLUE_GREY2 = "#6A7B86";
+    // https://mozilla.design/firefox/color/
+    const FIREFOX_YELLOW_5 = "#FFBD4F";
+    const FIREFOX_YELLOW_6 = "#FFA537";
+    const FIREFOX_BLUE_3 = "#00DDFF";
+    const FIREFOX_BLUE_4 = "#00B3F5";
+    const FIREFOX_BLUE_5 = "#0290EE";
 
     const MS_PER_DAY = 24*60*60*1000;
     const MS_PER_WEEK = 7*MS_PER_DAY;
@@ -88,8 +84,8 @@
                     "closedBugCounts": "area",
                 },
                 colors: {
-                    "openBugCounts": FIREFOX_LIGHT_ORANGE,
-                    "closedBugCounts": FIREFOX_LIGHT_BLUE,
+                    "openBugCounts": FIREFOX_YELLOW_6,
+                    "closedBugCounts": FIREFOX_BLUE_4,
                 },
                 groups: [["openBugCounts", "closedBugCounts"]],
                 order: null,
