@@ -19,7 +19,8 @@
     function weeks(w) { return days(7 * w); }
     function months(m) { return weeks(4 * m); }
 
-    const queryString = getQueryString();
+    const PRODUCT_FILTER = "&classification=Client%20Software&classification=Components&product=DevTools&product=Firefox&product=Core&product=Testing&product=Toolkit&product=WebExtensions";
+    const queryString = getQueryString() + PRODUCT_FILTER;
     const chartStartDate = getChartStartDate();
 
     function getQueryString() {
