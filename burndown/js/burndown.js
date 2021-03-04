@@ -207,8 +207,13 @@
                 openBugCount += opened - closed;
                 openBugCounts.push(openBugCount);
 
-                closedBugCount += closed;
-                closedBugCounts.push(closedBugCount);
+                // Don't display bugs closed before the start date.
+                if (closedBugCounts.length == 0) {
+                  closedBugCounts.push(closedBugCount);
+                } else {
+                  closedBugCount += closed;
+                  closedBugCounts.push(closedBugCount);
+                }
             }
 
             // Extend last bug count to today, so burndown ends on today.
