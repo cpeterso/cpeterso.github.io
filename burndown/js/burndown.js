@@ -226,10 +226,6 @@
 
             drawChart(bugDates, openBugCounts, closedBugCounts);
 
-            function roundToTwoDecimals(f) {
-              return Math.floor(f * 100) / 100;
-            }
-
             let chartPeriodInMs = Date.parse(_.last(bugDates)) - Date.parse(_.first(bugDates));
             let chartPeriodInDays = Math.ceil(chartPeriodInMs / MS_PER_DAY);
 
@@ -248,6 +244,13 @@
             console.log(`Velocity: ${bugsClosed} bugs closed (${initialClosedBugCount} -> ${currentClosedBugCount}) in ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day`);
             console.log(`Velocity: ${bugsOpened} bugs opened (${initialOpenBugCount} -> ${currentOpenBugCount + bugsClosed}) / ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsOpenedPerDay)} bugs opened per day`);
 
+            logForecast("Forecast min", bugsClosedPerDay);
+            logForecast("Forecast max", bugsOpenedAndClosedPerDay);
+
+            function roundToTwoDecimals(f) {
+              return Math.floor(f * 100) / 100;
+            }
+
             function logForecast(desc, bugsClosedPerDay) {
               if (bugsClosedPerDay > 0) {
                 let daysToZeroOpenBugs = Math.ceil(currentOpenBugCount / bugsClosedPerDay);
@@ -259,9 +262,6 @@
                 console.log(`${desc}: ${currentOpenBugCount} open bugs / ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day -> Infinity`);
               }
             }
-
-            logForecast("Forecast min", bugsClosedPerDay);
-            logForecast("Forecast max", bugsOpenedAndClosedPerDay);
         });
     }
 
