@@ -2,11 +2,8 @@
     "use strict";
 
     // https://mozilla.design/firefox/color/
-    const FIREFOX_YELLOW_5 = "#FFBD4F";
     const FIREFOX_YELLOW_6 = "#FFA537";
-    const FIREFOX_BLUE_3 = "#00DDFF";
     const FIREFOX_BLUE_4 = "#00B3F5";
-    const FIREFOX_BLUE_5 = "#0290EE";
 
     const MS_PER_DAY = 24*60*60*1000;
     const MS_PER_WEEK = 7*MS_PER_DAY;
