@@ -16,8 +16,8 @@
     function weeks(w) { return days(7 * w); }
     function months(m) { return weeks(4 * m); }
 
-    const PRODUCT_FILTER = "&classification=Client%20Software&classification=Components&product=DevTools&product=Firefox&product=Core&product=Testing&product=Toolkit&product=WebExtensions";
-    const queryString = getQueryString() + PRODUCT_FILTER;
+    const queryString = getQueryString();
+    const searchParams = parseQueryString(queryString);
     const chartStartDate = getChartStartDate();
 
     function getQueryString() {
@@ -30,27 +30,26 @@
         return qs.slice(1, slash);
     }
 
+    function parseQueryString(qs) {
+        // e.g. "foo=bar&baz=qux&"
+        const kvs = {};
+        const params = qs.split("&");
+        for (let kv of params) {
+            kv = kv.split("=", 2);
+            const key = kv[0].toLowerCase();
+            if (key.length === 0) {
+                continue; // "&&"
+            }
+            const value = (kv.length > 1) ? decodeURIComponent(kv[1]) : null;
+            kvs[key] = value;
+        }
+        return kvs;
+    }
+
     function getChartStartDate() {
       const CHART_START_PERIOD = months(3);
-      const searchParams = parseQueryString(queryString);
-      return (searchParams && (searchParams.burnup_since || searchParams.since)) ||
+      return (searchParams.burnup_since || searchParams.since) ||
              yyyy_mm_dd(new Date(Date.now() - CHART_START_PERIOD));
-
-      function parseQueryString(qs) {
-          // e.g. "foo=bar&baz=qux&"
-          const kvs = {};
-          const params = qs.split("&");
-          for (let kv of params) {
-              kv = kv.split("=", 2);
-              const key = kv[0].toLowerCase();
-              if (key.length === 0) {
-                  return; // "&&"
-              }
-              const value = (kv.length > 1) ? decodeURIComponent(kv[1]) : null;
-              kvs[key] = value;
-          }
-          return kvs;
-      }
     }
 
     function getElementValue(id) {
@@ -119,15 +118,15 @@
         chart.innerText = msg;
     }
 
-    function searchAndPlotBugs() {
+    function searchAndPlotBugs(bugzillaQuery) {
         const t0 = Date.now();
-        debug(`searchAndPlotBugs: ${queryString}`);
-        if (!queryString) {
+        debug(`searchAndPlotBugs: ${bugzillaQuery}`);
+        if (!bugzillaQuery) {
             setErrorText("🙈 Zarro boogs found");
             return;
         }
 
-        $bugzilla.searchBugs(queryString, (error, bugs) => {
+        $bugzilla.searchBugs(bugzillaQuery, (error, bugs) => {
             const t1 = Date.now();
             debug(`searchAndPlotBugs: ${t1 - t0} ms`);
 
@@ -262,7 +261,9 @@
         });
     }
 
-    searchAndPlotBugs();
+    const PRODUCT_FILTER = "&classification=Client%20Software&classification=Components&product=DevTools&product=Firefox&product=Core&product=Testing&product=Toolkit&product=WebExtensions";
+    let bugzillaQuery = queryString + PRODUCT_FILTER;
+    searchAndPlotBugs(bugzillaQuery);
 
     const title = queryString.split("&").join(", ");
     document.title = `Burning up: ${title}`;
