@@ -40,7 +40,7 @@
             if (key.length === 0) {
                 continue; // "&&"
             }
-            const value = (kv.length > 1) ? decodeURIComponent(kv[1]) : null;
+            const value = (kv.length > 1) ? decodeURIComponent(kv[1]) : "";
             kvs[key] = value;
         }
         return kvs;
@@ -204,7 +204,8 @@
                 openBugCounts.push(openBugCount);
 
                 // Don't display bugs closed before the start date.
-                if (closedBugCounts.length == 0) {
+                if (closedBugCounts.length == 0 &&
+                    searchParams.burnup_ignore_old_closed_bugs !== undefined) {
                   closedBugCounts.push(closedBugCount);
                 } else {
                   closedBugCount += closed;
