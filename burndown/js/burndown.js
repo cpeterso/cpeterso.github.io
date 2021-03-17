@@ -241,8 +241,14 @@
             console.log(`Velocity: ${bugsClosed} bugs closed (${initialClosedBugCount} -> ${currentClosedBugCount}) in ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day`);
             console.log(`Velocity: ${bugsOpened} bugs opened (${initialOpenBugCount} -> ${currentOpenBugCount + bugsClosed}) / ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsOpenedPerDay)} bugs opened per day`);
 
-            logForecast("Forecast min", bugsClosedPerDay);
-            logForecast("Forecast max", bugsOpenedAndClosedPerDay);
+            let newBugCount = currentOpenBugCount + currentClosedBugCount - initialOpenBugCount;
+            console.log(`Scope creep: ${initialOpenBugCount} open bugs -> ${currentOpenBugCount + bugsClosed} open + closed bugs = ${100 * roundToTwoDecimals((currentOpenBugCount + bugsClosed) / initialOpenBugCount)}%`);
+
+            logForecast("Old forecast min", bugsClosedPerDay);
+            logForecast("Old forecast max", bugsOpenedAndClosedPerDay);
+
+            logForecast("FISSION FORECAST: Optimistic", 2);
+            logForecast("FISSION FORECAST: Pessimistic", 1);
 
             function roundToTwoDecimals(f) {
               return Math.floor(f * 100) / 100;
