@@ -277,6 +277,7 @@
             //logForecast("Old forecast max", bugsOpenedAndClosedPerDay);
 
             logForecast("FISSION FORECAST: Optimistic", 2);
+            logForecast("FISSION FORECAST: Likely", 1.5);
             logForecast("FISSION FORECAST: Pessimistic", 1);
 
             function roundToTwoDecimals(f) {
