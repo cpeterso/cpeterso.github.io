@@ -11,17 +11,16 @@
 
     function getForecastedNightlyVersion(forecastDate) {
         const NIGHTLY_FREEZE_DATES = [
-            makeFreezeDate(88, "2021-03-18"),
             makeFreezeDate(89, "2021-04-15"),
-            makeFreezeDate(90, "2021-05-13"),
-            makeFreezeDate(91, "2021-06-10"),
-            makeFreezeDate(92, "2021-07-08"),
-            makeFreezeDate(93, "2021-08-05"),
-            makeFreezeDate(94, "2021-09-02"),
-            makeFreezeDate(95, "2021-09-30"),
-            makeFreezeDate(96, "2021-10-28"),
-            makeFreezeDate(97, "2021-12-02"),
-            makeFreezeDate(98, "2022-01-06"),
+            makeFreezeDate(90, "2021-05-27"),
+            makeFreezeDate(91, "2021-06-24"),
+            makeFreezeDate(92, "2021-07-22"),
+            makeFreezeDate(93, "2021-08-19"),
+            makeFreezeDate(94, "2021-09-16"),
+            makeFreezeDate(95, "2021-10-14"),
+            makeFreezeDate(96, "2021-11-11"),
+            makeFreezeDate(97, "2021-12-09"),
+            makeFreezeDate(98, "2022-01-20"),
         ];
 
         let forecastTime = forecastDate.getTime();
