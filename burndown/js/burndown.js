@@ -5,9 +5,9 @@
     const FIREFOX_YELLOW_6 = "#FFA537";
     const FIREFOX_BLUE_4 = "#00B3F5";
 
-    const MS_PER_DAY = 24*60*60*1000;
-    const MS_PER_WEEK = 7*MS_PER_DAY;
-    const MS_PER_MONTH = 4*MS_PER_WEEK;
+    const MS_PER_DAY = 24 * 60 * 60 * 1000;
+    const MS_PER_WEEK = 7 * MS_PER_DAY;
+    const MS_PER_MONTH = 4 * MS_PER_WEEK;
 
     function getForecastedNightlyVersion(forecastDate) {
         const NIGHTLY_FREEZE_DATES = [
