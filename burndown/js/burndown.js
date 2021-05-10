@@ -272,8 +272,8 @@
             let newBugCount = currentOpenBugCount + currentClosedBugCount - initialOpenBugCount;
             console.log(`Scope creep: ${initialOpenBugCount} open bugs -> ${currentOpenBugCount + bugsClosed} open + closed bugs = ${100 * roundToTwoDecimals((currentOpenBugCount + bugsClosed) / initialOpenBugCount)}%`);
 
-            //logForecast("Old forecast min", bugsClosedPerDay);
-            //logForecast("Old forecast max", bugsOpenedAndClosedPerDay);
+            logForecast("Old best case forecast", bugsClosedPerDay);
+            logForecast("Old worst case forecast", bugsOpenedAndClosedPerDay);
 
             logForecast("FISSION FORECAST: Optimistic", 2);
             logForecast("FISSION FORECAST: Likely", 1.5);
