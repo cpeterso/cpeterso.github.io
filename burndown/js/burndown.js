@@ -11,7 +11,6 @@
 
     function getForecastedNightlyVersion(forecastDate) {
         const NIGHTLY_FREEZE_DATES = [
-            makeFreezeDate(89, "2021-04-15"),
             makeFreezeDate(90, "2021-05-27"),
             makeFreezeDate(91, "2021-06-24"),
             makeFreezeDate(92, "2021-07-22"),
