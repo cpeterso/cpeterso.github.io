@@ -272,11 +272,11 @@
             let newBugCount = currentOpenBugCount + currentClosedBugCount - initialOpenBugCount;
             console.log(`Scope creep: ${initialOpenBugCount} open bugs -> ${currentOpenBugCount + bugsClosed} open + closed bugs = ${formatPercentage((currentOpenBugCount + bugsClosed) / initialOpenBugCount)}`);
 
-            logForecast("Old best case forecast", bugsClosedPerDay);
-            logForecast("Old worst case forecast", bugsOpenedAndClosedPerDay);
+            //logForecast("Old best case forecast", bugsClosedPerDay);
+            //logForecast("Old worst case forecast", bugsOpenedAndClosedPerDay);
 
-            logForecast("FISSION FORECAST: Optimistic", 2);
-            logForecast("FISSION FORECAST: Likely", 1.5);
+            logForecast("FISSION FORECAST: Optimistic", 3);
+            logForecast("FISSION FORECAST: Likely", 2);
             logForecast("FISSION FORECAST: Pessimistic", 1);
 
             function formatPercentage(percentage) {
