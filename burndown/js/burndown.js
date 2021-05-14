@@ -265,12 +265,12 @@
             let bugsOpenedPerDay = (chartPeriodInDays > 0) ? (bugsOpened / chartPeriodInDays) : 0;
             let bugsOpenedAndClosedPerDay = bugsClosedPerDay - bugsOpenedPerDay;
 
-            console.log(`Progress: ${currentClosedBugCount} of ${currentOpenBugCount + currentClosedBugCount} bugs closed = ${roundToTwoDecimals(currentClosedBugCount / (currentOpenBugCount + currentClosedBugCount)) * 100}%`);
+            console.log(`Progress: ${currentClosedBugCount} of ${currentOpenBugCount + currentClosedBugCount} bugs closed = ${formatPercentage(currentClosedBugCount / (currentOpenBugCount + currentClosedBugCount))}`);
             console.log(`Velocity: ${bugsClosed} bugs closed (${initialClosedBugCount} -> ${currentClosedBugCount}) in ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day`);
             console.log(`Velocity: ${bugsOpened} bugs opened (${initialOpenBugCount} -> ${currentOpenBugCount + bugsClosed}) / ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsOpenedPerDay)} bugs opened per day`);
 
             let newBugCount = currentOpenBugCount + currentClosedBugCount - initialOpenBugCount;
-            console.log(`Scope creep: ${initialOpenBugCount} open bugs -> ${currentOpenBugCount + bugsClosed} open + closed bugs = ${100 * roundToTwoDecimals((currentOpenBugCount + bugsClosed) / initialOpenBugCount)}%`);
+            console.log(`Scope creep: ${initialOpenBugCount} open bugs -> ${currentOpenBugCount + bugsClosed} open + closed bugs = ${formatPercentage((currentOpenBugCount + bugsClosed) / initialOpenBugCount)}`);
 
             logForecast("Old best case forecast", bugsClosedPerDay);
             logForecast("Old worst case forecast", bugsOpenedAndClosedPerDay);
@@ -278,6 +278,10 @@
             logForecast("FISSION FORECAST: Optimistic", 2);
             logForecast("FISSION FORECAST: Likely", 1.5);
             logForecast("FISSION FORECAST: Pessimistic", 1);
+
+            function formatPercentage(percentage) {
+              return `${Math.round(percentage * 100)}%`;
+            }
 
             function roundToTwoDecimals(f) {
               return Math.floor(f * 100) / 100;
