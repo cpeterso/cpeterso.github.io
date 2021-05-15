@@ -275,7 +275,7 @@
             //logForecast("Old best case forecast", bugsClosedPerDay);
             //logForecast("Old worst case forecast", bugsOpenedAndClosedPerDay);
 
-            logForecast("FISSION FORECAST: Likely", 2.5);
+            logForecast("FISSION FORECAST: Optimistic", 2.5);
             logForecast("FISSION FORECAST: Pessimistic", 1.5);
 
             function formatPercentage(percentage) {
