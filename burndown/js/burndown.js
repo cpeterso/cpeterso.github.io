@@ -297,8 +297,8 @@
         });
     }
 
-    const PRODUCT_FILTER = "&classification=Client%20Software&classification=Components&product=DevTools&product=Firefox&product=Core&product=Testing&product=Toolkit&product=WebExtensions";
-    let bugzillaQuery = queryString + PRODUCT_FILTER;
+    const CLASSIFICATION_FILTER = "&classification=Client%20Software&classification=Components";
+    let bugzillaQuery = queryString + CLASSIFICATION_FILTER;
     searchAndPlotBugs(bugzillaQuery);
 
     const title = queryString.split("&").join(", ");
