@@ -6,36 +6,6 @@
     const FIREFOX_BLUE_4 = "#00B3F5";
 
     const MS_PER_DAY = 24 * 60 * 60 * 1000;
-    const MS_PER_WEEK = 7 * MS_PER_DAY;
-    const MS_PER_MONTH = 4 * MS_PER_WEEK;
-
-    function getForecastedNightlyVersion(forecastDate) {
-        const NIGHTLY_FREEZE_DATES = [
-            makeFreezeDate(90, "2021-05-27"),
-            makeFreezeDate(91, "2021-07-08"),
-            makeFreezeDate(92, "2021-08-05"),
-            makeFreezeDate(93, "2021-09-02"),
-            makeFreezeDate(94, "2021-09-30"),
-            makeFreezeDate(95, "2021-10-28"),
-            makeFreezeDate(96, "2021-12-02"),
-            makeFreezeDate(97, "2021-01-06"),
-            makeFreezeDate(98, "2022-02-03"),
-            makeFreezeDate(99, "2022-03-03"),
-        ];
-
-        let forecastTime = forecastDate.getTime();
-        for (const nightly of NIGHTLY_FREEZE_DATES) {
-            if (forecastTime <= nightly.freezeTime) {
-                return nightly.version;
-            }
-        }
-
-        return "2022? 😵";
-
-      function makeFreezeDate(nightlyVersion, freezeYMD) {
-          return {version: nightlyVersion, freezeTime: new Date(freezeYMD).getTime()};
-      }
-    }
 
     const DEBUG = true;
     function debug(...args) { DEBUG && console.debug(...args); }
@@ -266,11 +236,8 @@
             let bugsOpenedAndClosedPerDay = bugsClosedPerDay - bugsOpenedPerDay;
 
             console.log(`Progress: ${currentClosedBugCount} of ${currentOpenBugCount + currentClosedBugCount} bugs closed = ${formatPercentage(currentClosedBugCount / (currentOpenBugCount + currentClosedBugCount))}`);
-            console.log(`Velocity: ${bugsClosed} bugs closed (${initialClosedBugCount} -> ${currentClosedBugCount}) in ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day`);
             console.log(`Velocity: ${bugsOpened} bugs opened (${initialOpenBugCount} -> ${currentOpenBugCount + bugsClosed}) / ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsOpenedPerDay)} bugs opened per day`);
-
-            let newBugCount = currentOpenBugCount + currentClosedBugCount - initialOpenBugCount;
-            console.log(`Scope creep: ${initialOpenBugCount} open bugs -> ${currentOpenBugCount + bugsClosed} open + closed bugs = ${formatPercentage((currentOpenBugCount + bugsClosed) / initialOpenBugCount)}`);
+            console.log(`Velocity: ${bugsClosed} bugs closed (${initialClosedBugCount} -> ${currentClosedBugCount}) in ${chartPeriodInDays} days = ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day`);
 
             logForecast("Optimistic forecast", bugsClosedPerDay);
             logForecast("Pessimistic forecast", bugsOpenedAndClosedPerDay);
@@ -289,7 +256,7 @@
                 let msToZeroOpenBugs = daysToZeroOpenBugs * MS_PER_DAY;
                 let dateOfZeroOpenBugs = new Date(Date.now() + msToZeroOpenBugs);
                 let ymdOfZeroOpenBugs = yyyy_mm_dd(dateOfZeroOpenBugs);
-                console.log(`${desc}: ${currentOpenBugCount} open bugs / ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day = ${daysToZeroOpenBugs} days -> ${ymdOfZeroOpenBugs} (Nightly ${getForecastedNightlyVersion(dateOfZeroOpenBugs)})`);
+                console.log(`${desc}: ${currentOpenBugCount} open bugs / ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day = ${daysToZeroOpenBugs} days -> ${ymdOfZeroOpenBugs}`);
               } else {
                 console.log(`${desc}: ${currentOpenBugCount} open bugs / ${roundToTwoDecimals(bugsClosedPerDay)} bugs closed per day -> Infinity`);
               }
