@@ -91,6 +91,12 @@
                     tick: {format: "%Y-%m-%d"},
                 }
             },
+            interaction: {
+                inputType: {
+                    mouse: true,
+                    touch: false,
+                }
+            },
         });
     }
 
